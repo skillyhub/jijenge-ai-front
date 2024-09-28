@@ -4,11 +4,15 @@ import { FiActivity } from "react-icons/fi";
 import { IoCubeOutline } from "react-icons/io5";
 import { PiWaveformLight } from "react-icons/pi";
 import { IoIosArrowBack } from "react-icons/io";
+import { useSelector } from 'react-redux';
+import { selectService } from '../redux/slices/serviceSlice';
 
 
 
 function CreditScore({hide,back}) {
+  const phone=useSelector(selectService)
 
+  console.log("phone->",phone.phone_number)
   return (
     <section className='w-full transition-opacity relative animate-fadeIn duration-1000'>
       {hide &&<IoIosArrowBack 

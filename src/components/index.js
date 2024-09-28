@@ -7,6 +7,9 @@ import Loan from "./Loan";
 import IndicationBar from "./IndicationBar";
 import Footer from "./Footer";
 import Loader from "./Loader";
+import PDFDownloadComponent from "./PdfComponent";
+import LoadinComponent from "./LoadinComponent";
+import Transactions from "./Transactions";
 
 
 
@@ -19,5 +22,8 @@ export {
     Loan,
     IndicationBar,
     Footer,
-    Loader
+    Loader,
+    PDFDownloadComponent,
+    LoadinComponent,
+    Transactions
 }

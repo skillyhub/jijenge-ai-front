@@ -2,7 +2,7 @@ import React from 'react'
 import { Footer, Navbar } from '../components'
 import { useLocation } from 'react-router-dom'
 
-function Layout({children}) {
+function Layout({children,hide}) {
     const location=useLocation()
   return (
     <div className='w-screen'>

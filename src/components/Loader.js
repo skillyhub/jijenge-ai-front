@@ -7,7 +7,7 @@ const Loader = () => {
     <div className="loader-container">
       <div className="loader"></div>
       <span className='font-bold absolute text-md text-gray-500 animate-pulse '>
-        Jijenge
+        Jijenge AI
     </span>
     </div>
   );
