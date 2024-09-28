@@ -1,0 +1,61 @@
+import React from 'react'
+import { Link, useLocation } from 'react-router-dom'
+
+function Navbar() {
+    const location=useLocation()
+    // console.log(location.pathname)
+  return (
+    <section className='w-3/4 mx-auto py-5 justify-between flex bg-transparent'>
+        {/* <span className='font-extrabold uppercase text-2xl text-white'>jijenge ai</span> */}
+        <img 
+            className='w-[150px] h-[50px]'
+            src='/img/jijenge-logo.png'
+            alt="logo"
+        />
+        <div className='flex items-center space-x-5'>
+            <Link 
+                className={
+                   location.pathname ==='/'? 'text-blue-400 capitalize cursor-pointer font-bold':'text-white capitalize cursor-pointer hover:font-bold '
+                } 
+                to="/"
+            >
+                Home
+            </Link>
+            <Link 
+                className={
+                    location.pathname ==='/credit-score'? 'text-blue-400 capitalize cursor-pointer font-bold ':'text-white capitalize cursor-pointer hover:font-bold '
+                 } 
+                 to="/credit-score"
+            >
+                credit score
+            </Link>
+            {/* <Link 
+                className={
+                    location.pathname ==='/loan'? 'text-blue-400 capitalize cursor-pointer font-bold ':'text-white capitalize cursor-pointer hover:font-bold '
+                 } 
+                 to="/loan"
+            >
+                loan
+            </Link> */}
+            <Link 
+                className={
+                    location.pathname ==='/about-us'? 'text-blue-400 capitalize cursor-pointer font-bold ':'text-white capitalize cursor-pointer hover:font-bold '
+                 } 
+                 to="/about-us"
+            >
+                about us
+            </Link>
+            <Link 
+                className={
+                    location.pathname ==='/contact'? 'text-blue-400 capitalize cursor-pointer font-bold ':'text-white capitalize cursor-pointer hover:font-bold '
+                 } 
+                 to="/contact"
+            >
+                contact
+            </Link>
+        </div>
+    </section>
+  )
+}
+
+export default Navbar
