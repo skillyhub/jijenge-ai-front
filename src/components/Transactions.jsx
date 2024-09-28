@@ -3,7 +3,7 @@ import axios from "axios"
 
 function Transactions({data}) {
     const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage] = useState(5); // Adjusted rows per page for demo
+  const [rowsPerPage] = useState(15); // Adjusted rows per page for demo
   const [transactions, setTransactions] = useState([]);
 
   const totalPages = Math.ceil(transactions?.length / rowsPerPage);
