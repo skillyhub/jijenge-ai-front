@@ -1,17 +1,8 @@
-import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import React, { useState } from "react";
 import CreditScore from "./CreditScore";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectPhone,
-  setAnalyze,
-  setService,
-} from "../redux/slices/serviceSlice";
 import PDFDownloadComponent from "./PdfComponent";
-import { useGetMessageMutation } from "../redux/services/services";
 import axios from "axios";
-import { redirect } from "react-router-dom";
-import LoadinComponent from "./LoadinComponent";
+import LoadingComponent from "./LoadingComponent";
 
 function Home() {
   const [smartSuggestion, setSmartSuggestion] = useState(true);
@@ -31,12 +22,7 @@ function Home() {
     loan: false,
   });
 
-  const [getMessage, { data, isLoading, isError, error, isSuccess }] =
-    useGetMessageMutation();
-
-  const dispatch = useDispatch();
-  // const phone=useSelector(selectPhone)
-  const phone = useState("+250783771485");
+  const phone = useState("+250790183836");
 
   const saveSuggestion = (value, key) => {
     setSuggestion(value);
@@ -52,10 +38,7 @@ function Home() {
   const handlePhoneInput = async (e) => {
     setLoading({ ...loading, suggestion: true });
     e.preventDefault();
-    // console.log("phone->",phoneNumber)
-    // dispatch(setService({
-    //   phone_number:phoneNumber
-    // }))
+
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/transactions/analyze`,
@@ -66,8 +49,6 @@ function Home() {
       console.log(response.data);
       setLoading({ ...loading, suggestion: false });
       saveSuggestion(response?.data?.analysis || response?.data?.msg);
-
-      // dispatch(setAnalyze(response?.data?.analysis))
     } catch (error) {
       console.log("error", error);
       setLoading({ ...loading, suggestion: false });
@@ -86,9 +67,13 @@ function Home() {
         }
       );
       setLoading({ ...loading, loan: false });
-      console.log("request loan response->", response.data);
+
       saveSuggestion(response?.data?.analysis, "suggestion-loan");
-      setRequestLoanSuggestion(response?.data?.analysis);
+      setRequestLoanSuggestion(
+        response?.data?.analysis ||
+          response?.data?.msg ||
+          response?.data?.message
+      );
     } catch (error) {
       setLoading({ ...loading, loan: false });
     }
@@ -96,10 +81,7 @@ function Home() {
 
   const handleRequestLoan = async (e) => {
     e.preventDefault();
-    // console.log("phone->",phoneNumber)
-    // dispatch(setService({
-    //   phone_number:phoneNumber
-    // }))
+
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/transactions/analyze`,
@@ -109,12 +91,12 @@ function Home() {
       );
       console.log(response.data);
       saveSuggestion(response?.data?.analysis, "suggestion");
-
-      // dispatch(setAnalyze(response?.data?.analysis))
     } catch (error) {
       console.log("error", error);
     }
   };
+
+  console.log("handleRequestLoan :>> ", handleRequestLoan);
   const StructuredFinancialAnalysis = ({ analysisText }) => {
     // Function to parse the analysis text
     const parseAnalysis = (text) => {
@@ -199,8 +181,8 @@ function Home() {
 
     // Function to split the text into sections
     const splitSections = (text) => {
-      const sections = text.split("*").filter((s) => s.trim());
-      return sections.map((s) => s.trim());
+      const sections = text.split("*").filter((s) => s?.trim());
+      return sections.map((s) => s?.trim());
     };
 
     const sections = splitSections(suggestion);
@@ -238,7 +220,7 @@ function Home() {
                   <h3 className="font-semibold text-lg mb-2">
                     Financial Advice:
                   </h3>
-                  <p>{section.split(":")[1].trim()}</p>
+                  <p>{section.split(":")[1]?.trim()}</p>
                 </div>
               );
             } else {
@@ -363,7 +345,7 @@ function Home() {
                           disabled={!phoneNumber}
                           className="w-full p-4 bg-blue-600 text-white text-center capitalize mt-5 rounded-md"
                         >
-                          {loading.suggestion ? <LoadinComponent /> : "check"}
+                          {loading.suggestion ? <LoadingComponent /> : "check"}
                         </button>
                       </>
                     )}
@@ -390,7 +372,7 @@ function Home() {
                           placeholder="Desired Loan amount"
                           className="w-full py-3 outline-none indent-2 bg-gray-600 rounded-md text-white"
                           onChange={(e) =>
-                            setAmount(Number(e.target.value.trim()))
+                            setAmount(Number(e.target.value?.trim()))
                           }
                           required
                           type="number"
@@ -399,7 +381,7 @@ function Home() {
                           placeholder="Phone Number"
                           className="w-full py-3 outline-none indent-2 mt-5 bg-gray-600 rounded-md text-white"
                           onChange={(e) =>
-                            setLPhoneNumber(e.target.value.trim())
+                            setLPhoneNumber(e.target.value?.trim())
                           }
                           required
                         />
@@ -407,7 +389,7 @@ function Home() {
                           onClick={requestLoansuggestion}
                           className="w-full py-3 bg-blue-600 text-white text-center capitalize mt-5 rounded-md"
                         >
-                          {loading.loan ? <LoadinComponent /> : "request"}
+                          {loading.loan ? <LoadingComponent /> : "request"}
                         </button>
                       </>
                     )}

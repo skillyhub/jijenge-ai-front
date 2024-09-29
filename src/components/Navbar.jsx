@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { selectPhone } from "../redux/slices/serviceSlice";
 
 function Navbar() {
   const location = useLocation();

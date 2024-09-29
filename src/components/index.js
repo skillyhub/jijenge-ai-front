@@ -8,22 +8,20 @@ import IndicationBar from "./IndicationBar";
 import Footer from "./Footer";
 import Loader from "./Loader";
 import PDFDownloadComponent from "./PdfComponent";
-import LoadinComponent from "./LoadinComponent";
+import LoadingComponent from "./LoadingComponent";
 import Transactions from "./Transactions";
 
-
-
 export {
-    Navbar,
-    Home,
-    AboutUs,
-    Contact,
-    CreditScore,
-    Loan,
-    IndicationBar,
-    Footer,
-    Loader,
-    PDFDownloadComponent,
-    LoadinComponent,
-    Transactions
-}
+  Navbar,
+  Home,
+  AboutUs,
+  Contact,
+  CreditScore,
+  Loan,
+  IndicationBar,
+  Footer,
+  Loader,
+  PDFDownloadComponent,
+  LoadingComponent as LoadinComponent,
+  Transactions,
+};

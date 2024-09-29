@@ -1,8 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Loader } from "../components";
-import { useSelector } from "react-redux";
-import { selectPhone, selectService } from "../redux/slices/serviceSlice";
 
 const Home = lazy(() => import("../pages/HomePage"));
 const Credit = lazy(() => import("../pages/CreditPage"));
